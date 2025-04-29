@@ -7,18 +7,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <img src="44thロゴ.png" alt="技大祭ロゴ" class="logo-top">
   <h1>ルーレット</h1>
 
   <textarea id="namesInput" placeholder="ここに名前を改行で入力（最大300人）"></textarea><br>
   <div class="buttons">
     <button id="setNames">名前をセット</button>
-    <button id="spin" disabled>スタート</button>
+    <button id="spin" disabled>回す！</button>
   </div>
 
-  <canvas id="wheel" width="400" height="400"></canvas>
+  <div class="roulette-container">
+    <canvas id="wheel" width="400" height="400"></canvas>
+    <img src="44thロゴ.png" alt="ロゴ" class="logo-overlay">
+  </div>
 
   <div id="resultModal" class="hidden">
     <div id="resultText"></div>
+    <button id="closeModal">閉じる</button>
   </div>
 
   <script src="script.js"></script>
