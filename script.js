@@ -3,7 +3,8 @@ const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spin');
 const setNamesButton = document.getElementById('setNames');
 const namesInput = document.getElementById('namesInput');
-const resultDiv = document.getElementById('result');
+const resultModal = document.getElementById('resultModal');
+const resultText = document.getElementById('resultText');
 
 let items = [];
 let colors = [];
@@ -42,8 +43,7 @@ setNamesButton.addEventListener('click', () => {
 
   drawWheel();
   spinButton.disabled = false;
-  resultDiv.textContent = '';
-  resultDiv.classList.remove('show');
+  resultModal.classList.add('hidden');
 });
 
 // ルーレットを描画
@@ -64,7 +64,7 @@ function drawWheel() {
     ctx.fillStyle = '#000';
     ctx.font = '8px sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText(items[i].substring(0, 5), 180, 0); // 5文字以内表示
+    ctx.fillText(items[i].substring(0, 5), 180, 0); // 5文字以内
     ctx.restore();
   }
 }
@@ -73,8 +73,7 @@ function drawWheel() {
 function spinWheel() {
   if (spinning) return;
   spinning = true;
-  resultDiv.textContent = '';
-  resultDiv.classList.remove('show');
+  resultModal.classList.add('hidden');
 
   let spinAngle = Math.random() * 360 + 1080; // 3回転以上
   let spinTime = 4000; // 回転時間 4秒
@@ -112,8 +111,8 @@ function showResult() {
   const degrees = angle * 180 / Math.PI;
   const normalized = (degrees + 90) % 360;
   const index = Math.floor(numItems - (normalized / 360) * numItems) % numItems;
-  resultDiv.textContent = `当たり: ${items[index]}`;
-  resultDiv.classList.add('show');
+  resultText.textContent = `🎯 ${items[index]} 🎯`;
+  resultModal.classList.remove('hidden');
 }
 
 // スタートボタン

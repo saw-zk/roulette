@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ルーレット300人版</title>
+  <title>ルーレット</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>ルーレット</h1>
 
   <textarea id="namesInput" placeholder="ここに名前を改行で入力（最大300人）"></textarea><br>
-  <button id="setNames">名前をセット</button>
-  <button id="spin" disabled>回す！</button>
+  <div class="buttons">
+    <button id="setNames">名前をセット</button>
+    <button id="spin" disabled>スタート</button>
+  </div>
 
   <canvas id="wheel" width="400" height="400"></canvas>
 
-  <div id="result"></div>
+  <div id="resultModal" class="hidden">
+    <div id="resultText"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
