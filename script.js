@@ -5,6 +5,7 @@ const setNamesButton = document.getElementById('setNames');
 const namesInput = document.getElementById('namesInput');
 const resultModal = document.getElementById('resultModal');
 const resultText = document.getElementById('resultText');
+const closeModalButton = document.getElementById('closeModal');
 
 let items = [];
 let colors = [];
@@ -13,7 +14,6 @@ let arcSize = 0;
 let angle = 0;
 let spinning = false;
 
-// 色をランダムに作る関数
 function getRandomColor() {
   const letters = '0123456789ABCDEF';
   let color = '#';
@@ -23,7 +23,6 @@ function getRandomColor() {
   return color;
 }
 
-// 名前をセットする
 setNamesButton.addEventListener('click', () => {
   const names = namesInput.value.trim().split('\n').filter(name => name !== '');
   if (names.length === 0) {
@@ -46,7 +45,6 @@ setNamesButton.addEventListener('click', () => {
   resultModal.classList.add('hidden');
 });
 
-// ルーレットを描画
 function drawWheel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -64,19 +62,18 @@ function drawWheel() {
     ctx.fillStyle = '#000';
     ctx.font = '8px sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText(items[i].substring(0, 5), 180, 0); // 5文字以内
+    ctx.fillText(items[i].substring(0, 5), 180, 0);
     ctx.restore();
   }
 }
 
-// 回転処理
 function spinWheel() {
   if (spinning) return;
   spinning = true;
   resultModal.classList.add('hidden');
 
-  let spinAngle = Math.random() * 360 + 1080; // 3回転以上
-  let spinTime = 4000; // 回転時間 4秒
+  let spinAngle = Math.random() * 360 + 1080;
+  let spinTime = 4000;
   let startTime = null;
 
   function animate(timestamp) {
@@ -84,7 +81,7 @@ function spinWheel() {
     const elapsed = timestamp - startTime;
 
     const progress = Math.min(elapsed / spinTime, 1);
-    const easing = 1 - Math.pow(1 - progress, 3); // Ease-out
+    const easing = 1 - Math.pow(1 - progress, 3);
     angle = (spinAngle * easing) * Math.PI / 180;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -106,14 +103,18 @@ function spinWheel() {
   requestAnimationFrame(animate);
 }
 
-// 結果判定
 function showResult() {
   const degrees = angle * 180 / Math.PI;
   const normalized = (degrees + 90) % 360;
   const index = Math.floor(numItems - (normalized / 360) * numItems) % numItems;
-  resultText.textContent = `🎯 ${items[index]} 🎯`;
+  resultText.textContent = `${items[index]}`;
   resultModal.classList.remove('hidden');
 }
+
+// 「閉じる」ボタンでモーダルを隠す
+closeModalButton.addEventListener('click', () => {
+  resultModal.classList.add('hidden');
+});
 
 // スタートボタン
 spinButton.addEventListener('click', spinWheel);
