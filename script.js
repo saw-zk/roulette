@@ -43,6 +43,7 @@ setNamesButton.addEventListener('click', () => {
   drawWheel();
   spinButton.disabled = false;
   resultDiv.textContent = '';
+  resultDiv.classList.remove('show');
 });
 
 // ルーレットを描画
@@ -61,8 +62,9 @@ function drawWheel() {
     ctx.translate(200, 200);
     ctx.rotate(i * arcSize + arcSize / 2);
     ctx.fillStyle = '#000';
-    ctx.font = '12px sans-serif';
-    ctx.fillText(items[i].substring(0, 10), 120, 0); // 長い名前はカット
+    ctx.font = '8px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(items[i].substring(0, 5), 180, 0); // 5文字以内表示
     ctx.restore();
   }
 }
@@ -72,6 +74,7 @@ function spinWheel() {
   if (spinning) return;
   spinning = true;
   resultDiv.textContent = '';
+  resultDiv.classList.remove('show');
 
   let spinAngle = Math.random() * 360 + 1080; // 3回転以上
   let spinTime = 4000; // 回転時間 4秒
@@ -110,6 +113,7 @@ function showResult() {
   const normalized = (degrees + 90) % 360;
   const index = Math.floor(numItems - (normalized / 360) * numItems) % numItems;
   resultDiv.textContent = `当たり: ${items[index]}`;
+  resultDiv.classList.add('show');
 }
 
 // スタートボタン
