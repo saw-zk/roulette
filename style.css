@@ -1,0 +1,31 @@
+body {
+    text-align: center;
+    font-family: sans-serif;
+    margin-top: 20px;
+  }
+  
+  textarea {
+    width: 80%;
+    height: 150px;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  #wheel {
+    border: 5px solid #333;
+    border-radius: 50%;
+    margin: 20px 0;
+  }
+  
+  #result {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
